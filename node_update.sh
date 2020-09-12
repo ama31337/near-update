@@ -28,7 +28,8 @@ if [ $? -ne 0 ]; then
 
         #if make make was succesfully test a new node
         if [ $? -eq 0 ]; then
-        echo "run test nodes"
+        echo "new build was successfull, run test nodes"
+        "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "new build was successfull, run test nodes"  2>&1 > /dev/null
         rm -rf /home/$USER/near-update/localnet/node0/data
         rm -rf /home/$USER/near-update/localnet/node1/data
 #        rm -rf /home/$USER/near-update/localnet/node2/data
@@ -46,28 +47,29 @@ if [ $? -ne 0 ]; then
             if [ $? -eq 0 ]
             then
                 testcount=$((testcount + 1))
-                "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you: testnode #$count run ok"  2>&1 > /dev/null
+                "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "testnode #$count run ok"  2>&1 > /dev/null
                 echo $HOSTNAME ' inform you: testnode ' $count ' run ok'
             else
                 testcount=$((testcount - 1))
-                "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you: testnode #$count failed, check it"  2>&1 > /dev/null
+                "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "testnode #$count failed, check it"  2>&1 > /dev/null
                 echo $HOSTNAME ' inform you: testnode ' $count ' failed, check it'
             fi
         done
         echo 'kill test nodes'
         pkill neard
 
-        if testcount=2; then
-            echo 'test is succesfull, deploy a new node'
-            mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
-            mv /home/$USER/nearcore.new /home/$USER/nearcore
-            cd /home/$USER/
-            nearup stop
-            nearup run $networktype --binary-path ~/nearcore/target/release/
-            "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you: update finished, node status: active"  2>&1 > /dev/null
-            echo $HOSTNAME 'inform you: update finished, node status: active'
-        else
-            "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you: near update failed, check it manually"  2>&1 > /dev/null
-            echo $HOSTNAME 'inform you: near update failed, check it manually'
+            if testcount=2; then
+                echo 'test is succesfull, deploy a new node'
+                mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
+                mv /home/$USER/nearcore.new /home/$USER/nearcore
+                cd /home/$USER/
+                nearup stop
+                nearup run $networktype --binary-path ~/nearcore/target/release/
+                "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "update finished, node status: active"  2>&1 > /dev/null
+                echo $HOSTNAME 'inform you: update finished, node status: active'
+            else
+                "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "near update failed, check it manually"  2>&1 > /dev/null
+                echo $HOSTNAME 'inform you: near update failed, check it manually'
+            fi
         fi
 fi
