@@ -44,7 +44,9 @@ if [ $? -ne 0 ]; then
         testcount=0        
         for count in {0..1}
         do
-            diff <(curl -s https://rpc."$networktype".near.org/status | jq .version) <(curl -s http://127.0.0.1:305"$count"/status | jq .version)
+            testversion=$(curl -s http://127.0.0.1:305"$count"/status | jq .version | grep -Po '"version": "\K.*?(?=")' | grep beta | head -1)
+            gitversion=$(curl --silent "https://api.github.com/repos/nearprotocol/nearcore/releases" | grep -Po '"tag_name": "\K.*?(?=")' | grep beta | head -1)
+            diff <(echo "$testversion") <(echo "$gitversion")
             if [ $? -eq 0 ]
             then
                 testcount=$((testcount + 1))
