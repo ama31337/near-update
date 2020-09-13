@@ -3,7 +3,7 @@ Automatically update, test and run a new near node.
 With info messages to telegram.
 
 
-### Installations a
+### Installation
  1. Clone this repo to your home dir
 ```sh
 cd $HOME && git clone https://github.com/ama31337/near-update.git && cd ./near-update && chmod +x ./*.sh
