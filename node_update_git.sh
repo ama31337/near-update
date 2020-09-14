@@ -26,8 +26,10 @@ if [ $? -ne 0 ]; then
     git clone --branch $strippedversion https://github.com/nearprotocol/nearcore.git /home/$USER/nearcore.new
     cd /home/$USER/nearcore.new
     make release
+# make test of new build (atm it's always crashed)
+#    python3 /home/$USER/nearcore.new/scripts/parallel_run_tests.py 
 
-        #if make make was succesfully test a new node
+        #if make was succesfully test a new node
         if [ $? -eq 0 ]; then
         echo "new build was successfull, run test nodes"
         "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "new build was successfull, run test nodes"  2>&1 > /dev/null
