@@ -2,8 +2,25 @@
 Automatically update, test and run a new near node.
 With info messages to telegram.
 
+You need to have near node and nearup installed before. If you don't and want to deploy a new node follow this steps first:
+ 1. Install all nessesary software and dependencies
+```sh
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y git jq binutils-dev build-essential pkg-config libssl-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python protobuf-compiler python3 python3-pip llvm clang 
+```
+ 2. Install Rustup
+```sh
+curl --proto ‘=https’ --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+```
+ 3. Install nearup
+```sh
+pip3 install --user nearup
+export PATH=”$HOME/.local/bin:$PATH”
+```
 
-### Installation
+### Update system installation
  1. Clone this repo to your home dir
 ```sh
 cd $HOME && git clone https://github.com/ama31337/near-update.git && cd ./near-update && chmod +x ./*.sh
