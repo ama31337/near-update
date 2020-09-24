@@ -20,7 +20,7 @@ pip3 install --user nearup
 export PATH=”$HOME/.local/bin:$PATH”
 ```
 
-### Update system installation
+### Installation
  1. Clone this repo to your home dir
 ```sh
 cd $HOME && git clone https://github.com/ama31337/near-update.git && cd ./near-update && chmod +x ./*.sh
