@@ -25,7 +25,7 @@ export PATH=”$HOME/.local/bin:$PATH”
 ```sh
 cd $HOME && git clone https://github.com/ama31337/near-update.git && cd ./near-update && chmod +x ./*.sh
 ```
- 2. Edit your network in node_update.sh
+ 2. Edit your network in node_update.sh OR node_update_git.sh
  3. Put your telegram bot api key and chat id sendmsg_tgbot.sh
  4. Add node_update.sh OR node_update_git.sh to crontab, it's enought to run it twice a day(every 12h on the example below, you can chenge it to suit your needs), put absolute path in cron.
 ```sh
