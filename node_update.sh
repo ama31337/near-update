@@ -62,7 +62,8 @@ if [ $? -ne 0 ]; then
 
             if testcount=2; then
                 echo 'test is succesfull, deploy a new node'
-                mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
+#                mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
+                mv /home/$USER/nearcore /home/$USER/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
                 mv /home/$USER/nearcore.new /home/$USER/nearcore
                 cd /home/$USER/
                 nearup stop
