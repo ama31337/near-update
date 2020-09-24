@@ -65,7 +65,7 @@ if [ $? -ne 0 ]; then
 
             if testcount=2; then
                 echo 'test is succesfull, deploy a new node'
-                mkdir -p /home/$USER/nearcore.bak/
+                mkdir -p /home/$USER/nearcore.bak
                 mv /home/$USER/nearcore /home/$USER/nearcore.bak/nearcore-"`date +"%Y-%m-%d(%H:%M)"`"
                 mv /home/$USER/nearcore.new /home/$USER/nearcore
                 cd /home/$USER/
