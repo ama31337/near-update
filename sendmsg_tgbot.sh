@@ -1,7 +1,7 @@
 #!/bin/bash
 
-telegram_bot_token="bot_api" # Your bot api from @botfather
-telegram_chat_id="chat_id" # Your tg id or any chat id to send msg
+telegram_bot_token="1300378017:AAEoicYcVG1KAPv2ZyHWmJq1oJVQNGPyD5Q"
+telegram_chat_id="-466217161"
 
 Title="$1"
 Message="$2"

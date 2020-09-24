@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #choose your network
-networktype=$betanet
+networktype="betanet"
 
 SCRIPT_DIR=`cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P`
 
@@ -36,10 +36,10 @@ if [ $? -ne 0 ]; then
         rm -rf /home/$USER/near-update/localnet/node1/data
 #        rm -rf /home/$USER/near-update/localnet/node2/data
 #        rm -rf /home/$USER/near-update/localnet/node3/data
-        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node0 run
-        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node1 run --boot-nodes ed25519:7PGseFbWxvYVgZ89K1uTJKYoKetWs7BJtbyXDzfbAcqX@127.0.0.1:24550
-#        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node2 run --boot-nodes ed25519:7PGseFbWxvYVgZ89K1uTJKYoKetWs7BJtbyXDzfbAcqX@127.0.0.1:24550
-#        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node3 run --boot-nodes ed25519:7PGseFbWxvYVgZ89K1uTJKYoKetWs7BJtbyXDzfbAcqX@127.0.0.1:24550
+        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node0 run &> /dev/null &
+        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node1 run --boot-nodes ed25519:7PGseFbWxvYVgZ89K1uTJKYoKetWs7BJtbyXDzfbAcqX@127.0.0.1:24550  &> /dev/null &
+#        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node2 run --boot-nodes ed25519:7PGseFbWxvYVgZ89K1uTJKYoKetWs7BJtbyXDzfbAcqX@127.0.0.1:24550  &> /dev/null &
+#        /home/$USER/nearcore.new/target/release/neard --home /home/$USER/near-update/localnet/node3 run --boot-nodes ed25519:7PGseFbWxvYVgZ89K1uTJKYoKetWs7BJtbyXDzfbAcqX@127.0.0.1:24550 &> /dev/null &
         sleep 10
         echo "run test"
         testcount=0        
@@ -74,5 +74,7 @@ if [ $? -ne 0 ]; then
                 "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "near update failed, check it manually"  2>&1 > /dev/null
                 echo $HOSTNAME 'inform you: near update failed, check it manually'
             fi
+        else
+            "${SCRIPT_DIR}/sendmsg_tgbot.sh" "$HOSTNAME inform you:" "near build failed, check it manually"  2>&1 > /dev/null
         fi
 fi
