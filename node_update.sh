@@ -25,8 +25,9 @@ if [ $? -ne 0 ]; then
     git clone --branch $strippedversion https://github.com/nearprotocol/nearcore.git /home/$USER/nearcore.new
     cd /home/$USER/nearcore.new
     make release
-# make test of new build (atm it's always crashed)
+#    tests need a lot of resource and time to execute, so we run a localnet after build
 #    python3 /home/$USER/nearcore.new/scripts/parallel_run_tests.py 
+#    python3 /home/$USER/nearcore.new/scripts/start_unittest.py
 
         #if make make was succesfully test a new node
         if [ $? -eq 0 ]; then
